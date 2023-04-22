@@ -1,19 +1,30 @@
+import pygame
+
+_ = False
+
+
 class Carte:
-    def __init__(self):
+    def __init__(self, jeu):
+        self.jeu = jeu
         self.carte = [
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 1, 1, 0, 0, 0, 0, 1],  # Ici on dessine la carte du jeu, la plus part des implementation sur
-            [1, 0, 0, 1, 1, 0, 0, 0, 0, 1],  # internet utilisent soit des dictionaires de string ou des listes de liste
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # ici on le fait avec une liste de liste afin de simplifier notre raycasting
-            [1, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, _, _, _, _, _, _, 1, _, 1],
+            [1, _, 1, 1, _, _, _, 1, _, 1],  # Ici on dessine la carte du jeu
+            [1, _, 1, _, _, _, _, _, _, 1],
+            [1, _, _, _, _, _, _, 1, _, 1],
+            [1, _, 1, _, _, _, 1, 1, _, 1],
+            [1, _, 1, _, _, _, _, _, _, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ]
+        self.carte_dict = {}
+        self.get_map()
 
-    def position(self, x, y):
-        if self.carte[x][y] == 0:
-            return self.carte[x][y], False
-        return self.carte[x][y], True
+    def get_map(self):
+        for y, ligne in enumerate(self.carte):
+            for x, valeur in enumerate(ligne):
+                if valeur:
+                    self.carte_dict[(x, y)] = valeur
 
-
+    def draw(self):
+        [pygame.draw.rect(self.jeu.fenetre, 'darkgray', (pos[0] * 100, pos[1] * 100, 100, 100), 2)
+         for pos in self.carte_dict]
