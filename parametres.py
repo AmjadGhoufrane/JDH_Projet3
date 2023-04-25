@@ -2,9 +2,14 @@ import math
 
 xd, yd = 1700, 900
 FPS = 60
-FOV = math.pi / 3  # FOV de 60°
-P_POS = 1.5,5
+P_POS = 1.5, 5
 P_ANGLE = 0
 P_VITESSE = 0.02
 P_VITESSE_ROTATION = 0.02
-P_ECHELLE = 60
+
+FOV = math.pi / 3  # FOV de 60°
+D_FOV = FOV / 2
+RAYONS = xd // 2
+D_RAYONS = RAYONS // 2
+DELTA_ANGLE = FOV / RAYONS
+DRAW_DISTANCE = 20
