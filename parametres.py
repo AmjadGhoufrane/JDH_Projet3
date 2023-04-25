@@ -4,12 +4,17 @@ import sys
 
 xd, yd = 1700, 900
 FPS = 60
-FOV = math.pi / 3  # FOV de 60°
-P_POS = 1.5,5
+P_POS = 1.5, 5
 P_ANGLE = 0
 P_VITESSE = 0.02
 P_VITESSE_ROTATION = 0.02
-P_ECHELLE = 60
+
+FOV = math.pi / 3  # FOV de 60°
+D_FOV = FOV / 2
+RAYONS = xd // 2
+D_RAYONS = RAYONS // 2
+DELTA_ANGLE = FOV / RAYONS
+DRAW_DISTANCE = 20
 
 class Parametres :
     def __init__(self):
@@ -24,21 +29,18 @@ class Parametres :
         self.P_ANGLE = P_ANGLE
         self.P_VITESSE = P_VITESSE
         self.P_VITESSE_ROTATION = P_VITESSE_ROTATION
-        self.P_ECHELLE = P_ECHELLE
         self.fov_text = font.render(f"FOV: {FOV}", True, (255, 255, 255))
         self.fps_text = font.render(f"FPS: {FPS}", True, (255, 255, 255))
         self.pos_text = font.render(f"P_POS: {P_POS}", True, (255, 255, 255))
         self.angle_text = font.render(f"P_ANGLE: {P_ANGLE}", True, (255, 255, 255))
         self.vitesse_text = font.render(f"P_VITESSE: {P_VITESSE}", True, (255, 255, 255))
         self.vitesse_rotation_text = font.render(f"P_VITESSE_ROTATION: {P_VITESSE_ROTATION}", True, (255, 255, 255))
-        self.echelle_text = font.render(f"P_ECHELLE: {P_ECHELLE}", True, (255, 255, 255))
         self.fov_rect = self.fov_text.get_rect(center=(xd//2, yd//2 - 144))
         self.fps_rect = self.fps_text.get_rect(center=(xd//2, yd//2 - 96))
         self.pos_rect = self.pos_text.get_rect(center=(xd//2, yd//2 - 48))
         self.angle_rect = self.angle_text.get_rect(center=(xd//2, yd//2))
         self.vitesse_rect = self.vitesse_text.get_rect(center=(xd//2, yd//2 + 48))
         self.vitesse_rotation_rect = self.vitesse_rotation_text.get_rect(center=(xd//2, yd//2 + 96))
-        self.echelle_rect = self.echelle_text.get_rect(center=(xd//2, yd//2 + 144))
         self.screen = pygame.display.set_mode((xd,yd))
         self.Main()
         
@@ -52,7 +54,6 @@ class Parametres :
         self.screen.blit(self.angle_text, self.angle_rect)
         self.screen.blit(self.vitesse_text, self.vitesse_rect)
         self.screen.blit(self.vitesse_rotation_text, self.vitesse_rotation_rect)
-        self.screen.blit(self.echelle_text, self.echelle_rect)
         for event in pygame.event.get():
                         if event.type == pygame.QUIT:  # Permet de gérer un clic sur le bouton de fermeture de la fenêtre
                             self.continuer = False
