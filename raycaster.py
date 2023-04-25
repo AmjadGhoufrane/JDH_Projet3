@@ -34,7 +34,7 @@ class raycasteur:
                 profond_hor += delta_profondeur
 
             # calcul vertical
-            x_vert, dx = (x_carte + 1, 1) if cos_a > 0 else (x_carte * 1e-6, -1)
+            x_vert, dx = (x_carte + 1, 1) if cos_a > 0 else (x_carte - 1e-6, -1)
             profond_vert = (x_vert - ox) / cos_a
             y_vert = oy + profond_vert * sin_a
 
