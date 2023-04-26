@@ -59,7 +59,7 @@ class Mainlanceur:
         self.clock.tick(FPS)
         pygame.display.set_caption(f'{self.clock.get_fps():.1f}')   # Permet d'afficher les fps en live à la place du nom de la fenetre
         self.fenetre.fill('black')
-        self.map.draw()
+        #self.map.draw()
         self.raycasteur.update()
         self.joueur.update()
         pygame.display.flip()
