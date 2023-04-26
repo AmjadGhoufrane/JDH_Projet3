@@ -56,8 +56,15 @@ class raycasteur:
                 profondeur = profond_hor
 
             # draw pour debug
-            pygame.draw.line(self.jeu.fenetre, 'yellow', (100 * ox, 100 * oy),
-                             (100 * ox + 100 * profondeur * cos_a, 100 * oy + 100 * profondeur * sin_a))
+            #pygame.draw.line(self.jeu.fenetre, 'yellow', (100 * ox, 100 * oy),
+            #                (100 * ox + 100 * profondeur * cos_a, 100 * oy + 100 * profondeur * sin_a))
+            # projction aka fausse 3d
+            hauteur_proj = DISTANCE_ECRAN / (profondeur + 0.0001)
+
+            # dessin des murs
+            couleur = [255/(1+profondeur**5**0.00002)]*3
+            pygame.draw.rect(self.jeu.fenetre, couleur,
+                             (rayon * ECHELLE, D_yd - hauteur_proj // 2, ECHELLE, hauteur_proj))
 
             angle_rayon += DELTA_ANGLE
 

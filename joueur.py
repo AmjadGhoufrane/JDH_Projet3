@@ -56,7 +56,7 @@ class Joueur:
 
     def update(self):
         self.mouvement()
-        self.draw()
+        #self.draw()
 
     @property
     def pos(self):
