@@ -25,10 +25,12 @@ font = pygame.font.Font(None, 48)
 # Set up the "START" button
 start_button_text = font.render("JOUER", True, (255, 255, 255))
 start_button_rect = start_button_text.get_rect(center=(xd//2, yd//2+ 25))
+#background_rect = pygame.Rect(start_button_rect.left - 10, start_button_rect.top - 10, start_button_rect.width + 20, start_button_rect.height + 20)
 
 # Set up the "SETTINGS" button
 settings_button_text = font.render("PARAMETRES DU JEU", True, (255, 255, 255))
 settings_button_rect = settings_button_text.get_rect(center=(xd//2, yd//2 + 100))
+
 
 credits_button_text = font.render("CREDITS", True, (255, 255, 255))
 credits_button_rect = credits_button_text.get_rect(center=(xd//2, yd//2 + 175))
@@ -41,6 +43,8 @@ img=pygame.image.load("logo.png")
 
 logo_button_text = f.render("LOGO TEMP", True, (255, 255, 255))
 logo_button_rect = logo_button_text.get_rect(center=(xd//2, yd//2 -200))
+
+bg = pygame.image.load("arriere.png")
 
 
 class Mainlanceur:
@@ -98,6 +102,8 @@ while True:
 
     # Draw the buttons
     screen.fill((0, 0, 0))
+    screen.blit(pygame.transform.scale(bg,(xd,yd)),(0,0))
+    #pygame.draw.rect(screen, (0, 0, 0), background_rect)
     screen.blit(start_button_text, start_button_text_rect)
     screen.blit(settings_button_text, settings_button_text_rect)
     screen.blit(credits_button_text, credits_button_rect)
