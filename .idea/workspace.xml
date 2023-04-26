@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cdd682f-aa9c-4aed-a391-4523e67154c3" name="Changes" comment="Initial commit">
+      <change afterPath="$PROJECT_DIR$/textures/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carte.py" beforeDir="false" afterPath="$PROJECT_DIR$/carte.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joueur.py" beforeDir="false" afterPath="$PROJECT_DIR$/joueur.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chargeur_textures.py" beforeDir="false" afterPath="$PROJECT_DIR$/chargeur_textures.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parametres.py" beforeDir="false" afterPath="$PROJECT_DIR$/parametres.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/raycaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/raycaster.py" afterDir="false" />
@@ -69,13 +70,16 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2OhOlTIrybnB8p19CnO7aeXIfxE" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/iuseh/PycharmProjects/PyGAME&quot;
@@ -180,6 +184,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>

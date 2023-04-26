@@ -21,6 +21,9 @@ DRAW_DISTANCE = 20
 DISTANCE_ECRAN = D_xd/math.tan(D_FOV)
 ECHELLE = xd // RAYONS
 
+T_TEXTURE = 256
+D_T_TEXTURE = T_TEXTURE//2
+
 
 class Parametres:
     def __init__(self):
