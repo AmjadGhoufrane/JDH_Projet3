@@ -16,7 +16,10 @@ class raycasteur:
             profondeur, hauteur_proj, texture, offset = valeurs
 
             colone = self.textures[texture].subsurface(
-                offset * (T_TEXTURE - ECHELLE), 0, ECHELLE, T_TEXTURE
+                int(offset * (T_TEXTURE - ECHELLE)),
+                0,
+                ECHELLE,
+                min(T_TEXTURE, int(hauteur_proj))
             )
             colone = pygame.transform.scale(colone, (ECHELLE, hauteur_proj))
             mur_pos = (rayon * ECHELLE, D_yd - hauteur_proj // 2)

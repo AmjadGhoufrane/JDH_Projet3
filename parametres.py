@@ -16,7 +16,7 @@ D_RAYONS = RAYONS // 2
 D_xd = xd // 2
 D_yd = yd // 2
 DELTA_ANGLE = FOV / RAYONS
-DRAW_DISTANCE = 20
+DRAW_DISTANCE = 50
 
 DISTANCE_ECRAN = D_xd/math.tan(D_FOV)
 ECHELLE = xd // RAYONS
