@@ -57,10 +57,11 @@ class Mainlanceur:
         self.Main()
 
     def Main(self):
+        pygame.mouse.set_visible(False)
         self.clock.tick(FPS)
         pygame.display.set_caption(
             f'{self.clock.get_fps():.1f}')  # Permet d'afficher les fps en live à la place du nom de la fenetre
-        self.fenetre.fill('black')
+        # self.fenetre.fill('black')
         # self.map.draw()
         self.raycasteur.update()
         self.joueur.update()
@@ -68,6 +69,7 @@ class Mainlanceur:
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Permet de gérer un clic sur le bouton de fermeture de la fenêtre
+                pygame.mouse.set_visible(True)
                 self.continuer = False
 
 

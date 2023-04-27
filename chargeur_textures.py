@@ -7,9 +7,19 @@ class renderer:
         self.jeu = jeu
         self.fenetre = self.jeu.fenetre
         self.mur = self.load()
+        self.skybox = self.get_texture('textures/Lune.jpg', (xd, D_yd))
+        self.skybox_offset = 0
 
     def draw(self):
+        self.draw_skybox()
         self.render()
+
+    def draw_skybox(self):
+        self.skybox_offset = (self.skybox_offset + 4.0 * self.jeu.joueur.rel) % xd
+        self.fenetre.blit(self.skybox, (-self.skybox_offset, 0))
+        self.fenetre.blit(self.skybox, (-self.skybox_offset + xd, 0))
+
+        pygame.draw.rect(self.fenetre, COULEUR_SOL, (0, D_yd, xd, yd))
 
     def render(self):
         liste_objets = self.jeu.raycasteur.pending

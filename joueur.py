@@ -5,6 +5,7 @@ import pygame
 
 class Joueur:
     def __init__(self, jeu):
+        self.rel = None
         self.jeu = jeu
         self.angle = P_ANGLE
         self.x, self.y = P_POS
@@ -36,27 +37,42 @@ class Joueur:
             num_key_pressed += 1
             dx += -speed_sin
             dy += speed_cos
-        if self.collisions(int(self.x + dx), int(self.y + dy)):
-            self.x += dx
-            self.y += dy
 
+        self.check_wall_collision(dx, dy)
         if keys[pygame.K_LEFT]:
             self.angle -= P_VITESSE_ROTATION * self.jeu.delta_time
         if keys[pygame.K_RIGHT]:
             self.angle += P_VITESSE_ROTATION * self.jeu.delta_time
+        self.angle %= math.tau
 
-    def collisions(self, x, y):
+    def mouse_control(self):
+        mx, my = pygame.mouse.get_pos()
+        if mx < MOUSE_BORDER_LEFT or mx > MOUSE_BORDER_RIGHT:
+            pygame.mouse.set_pos([D_xd, D_yd])
+        self.rel = pygame.mouse.get_rel()[0]
+        self.rel = max(-MOUSE_MAX_REL, min(MOUSE_MAX_REL, self.rel))
+        self.angle += self.rel * MOUSE_SENSITIVITY * self.jeu.delta_time
+
+    def check_wall(self, x, y):
         return (x, y) not in self.jeu.carte.carte_dict
 
+    def check_wall_collision(self, dx, dy):
+        scale = TAILLE_ECHELLE_JOUEUR / self.jeu.delta_time
+        if self.check_wall(int(self.x + dx * scale), int(self.y)):
+            self.x += dx
+        if self.check_wall(int(self.x), int(self.y + dy * scale)):
+            self.y += dy
+
     def draw(self):
-        #pygame.draw.line(self.jeu.fenetre, 'yellow', (self.x * 100, self.y * 100),
+        # pygame.draw.line(self.jeu.fenetre, 'yellow', (self.x * 100, self.y * 100),
         #                 (self.x * 100 + xd * math.cos(self.angle),
         #                  self.y * 100 + xd * math.sin(self.angle)), 2)
         pygame.draw.circle(self.jeu.fenetre, 'green', (self.x * 100, self.y * 100), 15)
 
     def update(self):
         self.mouvement()
-        #self.draw()
+        self.mouse_control()
+        # self.draw()
 
     @property
     def pos(self):
