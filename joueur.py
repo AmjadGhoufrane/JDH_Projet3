@@ -74,7 +74,7 @@ class Joueur:
         self.mouse_control()
         # self.draw()
 
-    @property
+    @property  # Permet de recuperer la position comme une variable mais avec un intermediaire
     def pos(self):
         return self.x, self.y
 

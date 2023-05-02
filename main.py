@@ -8,6 +8,8 @@ from raycaster import *
 from pygame.locals import *
 from creditss import *
 from chargeur_textures import *
+from sprites import *
+
 
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
@@ -54,16 +56,20 @@ class Mainlanceur:
         self.renderer = renderer(self)
         self.joueur = Joueur(self)
         self.raycasteur = raycasteur(self)
+        self.sprite = Sprite(self)
+        self.sprite_anime = SpriteAnime(self)
         self.Main()
 
     def Main(self):
         pygame.mouse.set_visible(False)
         self.clock.tick(FPS)
         pygame.display.set_caption(
-            f'{self.clock.get_fps():.1f}')  # Permet d'afficher les fps en live à la place du nom de la fenetre
+            f'{self.clock.get_fps():.1f}'+'        '+'x = '+f'{self.joueur.x:.1f}'+'  '+'y = '+f'{self.joueur.y:.1f}')  # Permet d'afficher les fps en live à la place du nom de la fenetre
         # self.fenetre.fill('black')
         # self.map.draw()
         self.raycasteur.update()
+        self.sprite.update()
+        self.sprite_anime.update()
         self.joueur.update()
         self.renderer.draw()
         pygame.display.flip()

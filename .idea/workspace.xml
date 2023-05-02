@@ -5,14 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cdd682f-aa9c-4aed-a391-4523e67154c3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/textures/Lune.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/animes/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/textures/sprites/arbre_1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/carte.py" beforeDir="false" afterPath="$PROJECT_DIR$/carte.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chargeur_textures.py" beforeDir="false" afterPath="$PROJECT_DIR$/chargeur_textures.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/joueur.py" beforeDir="false" afterPath="$PROJECT_DIR$/joueur.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parametres.py" beforeDir="false" afterPath="$PROJECT_DIR$/parametres.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raycaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/raycaster.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682515911970</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Initial commit">
+      <created>1682586290347</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682586290347</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

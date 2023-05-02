@@ -22,7 +22,7 @@ class renderer:
         pygame.draw.rect(self.fenetre, COULEUR_SOL, (0, D_yd, xd, yd))
 
     def render(self):
-        liste_objets = self.jeu.raycasteur.pending
+        liste_objets = sorted(self.jeu.raycasteur.pending, key = lambda t: t[0], reverse = True)
         for profondeur, image, pos in liste_objets:
             self.fenetre.blit(image, pos)
 
