@@ -1,7 +1,7 @@
 from sprites import *
 
+# Ici on a notre classe qui permet de gerer nos sprites
 
-# def __init__(self, jeu, chemin='textures/sprites/arbre_1.png', pos=(10.5, 3.5), echelle=1.0, shift=0.0):
 
 class Processeur:
     def __init__(self, jeu):
@@ -10,8 +10,8 @@ class Processeur:
         self.definition()
 
     def definition(self):
-        self.sprites.append(SpriteAnime(self.jeu))
-        self.sprites.append(Sprite(self.jeu))
+        self.sprites.append(SpriteAnime(self.jeu))          # ici on définit nos sprites en utilisant les classes qu'on a importé du fichier sprites
+        self.sprites.append(Sprite(self.jeu))               # on utilise la syntaxe suivante self.sprites.append(Sprite(self.jeu, chemin, pos))
 
     def update(self):
         for sprite in self.sprites:
