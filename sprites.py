@@ -59,7 +59,7 @@ class Sprite:
 
 
 class SpriteAnime(Sprite):
-    def __init__(self, jeu, chemin='textures/animes/1.png', pos=(9, 4), echelle=1.0, shift=0.0,
+    def __init__(self, jeu, chemin='textures/animes/1.png', pos=(10, 4.5), echelle=1.0, shift=0.0,
                  animation_time=120):
         super().__init__(jeu, chemin, pos, echelle, shift)
         self.animation_time = animation_time

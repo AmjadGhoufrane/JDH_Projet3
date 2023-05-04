@@ -3,7 +3,7 @@ import pygame
 import sys
 
 xd, yd = 1700, 900
-FPS = 60
+FPS = 144
 P_POS = 1.5, 5
 P_ANGLE = 0
 P_VITESSE = 0.04
@@ -15,9 +15,9 @@ MOUSE_MAX_REL = 40
 MOUSE_BORDER_LEFT = 100
 MOUSE_BORDER_RIGHT = xd - MOUSE_BORDER_LEFT
 
-COULEUR_SOL = (128,128,128)
+COULEUR_SOL = (50,50,50)
 
-FOV = math.pi / 3  # FOV de 60°
+FOV = math.pi / 2  # FOV de 60°
 D_FOV = FOV / 2
 RAYONS = xd // 2
 D_RAYONS = RAYONS // 2

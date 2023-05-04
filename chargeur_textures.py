@@ -34,5 +34,5 @@ class renderer:
     def load(self):
         return {
             1: self.get_texture('textures/1.png'),
-            2: self.get_texture('textures/2.png')
+            2: self.get_texture('textures/2.png'),
         }
