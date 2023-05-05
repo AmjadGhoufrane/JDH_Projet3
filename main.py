@@ -6,13 +6,16 @@ from carte import *
 from joueur import *
 from raycaster import *
 from pygame.locals import *
-from creditss import * 
+from creditss import *
+from chargeur_textures import *
+from processeur_objets import *
 
-pygame.mixer.pre_init(44100,16,2,4096)
+
+pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
 # Set up the display
-screen = pygame.display.set_mode((xd,yd))
+screen = pygame.display.set_mode((xd, yd))
 pygame.display.set_caption("The Dark Room")
 
 pygame.mixer.music.load("audio.mp3")
@@ -24,51 +27,53 @@ font = pygame.font.Font(None, 48)
 
 # Set up the "START" button
 start_button_text = font.render("JOUER", True, (255, 255, 255))
-start_button_rect = start_button_text.get_rect(center=(xd//2, yd//2+ 25))
-#background_rect = pygame.Rect(start_button_rect.left - 10, start_button_rect.top - 10, start_button_rect.width + 20, start_button_rect.height + 20)
+start_button_rect = start_button_text.get_rect(center=(xd // 2, yd // 2 + 25))
 
 # Set up the "SETTINGS" button
 settings_button_text = font.render("PARAMETRES DU JEU", True, (255, 255, 255))
-settings_button_rect = settings_button_text.get_rect(center=(xd//2, yd//2 + 100))
-
+settings_button_rect = settings_button_text.get_rect(center=(xd // 2, yd // 2 + 100))
 
 credits_button_text = font.render("CREDITS", True, (255, 255, 255))
-credits_button_rect = credits_button_text.get_rect(center=(xd//2, yd//2 + 175))
+credits_button_rect = credits_button_text.get_rect(center=(xd // 2, yd // 2 + 175))
 
 quitter_button_text = font.render("QUITTER", True, (255, 255, 255))
-quitter_button_rect = quitter_button_text.get_rect(center=(xd//2, yd//2 + 250))
+quitter_button_rect = quitter_button_text.get_rect(center=(xd // 2, yd // 2 + 250))
 
 f = pygame.font.Font(None, 100)
-img=pygame.image.load("logo.png")
+img = pygame.image.load("logo.png")
 
 logo_button_text = f.render("LOGO TEMP", True, (255, 255, 255))
-logo_button_rect = logo_button_text.get_rect(center=(xd//2, yd//2 -200))
+logo_button_rect = logo_button_text.get_rect(center=(xd // 2, yd // 2 - 200))
 
 bg = pygame.image.load("arriere.png")
-
-
 class Mainlanceur:
     def __init__(self, xd_lc, yd_lc):
-        self.carte = Carte(self)
-        self.joueur = Joueur(self)
-        self.raycasteur = raycasteur(self)
         self.delta_time = 1
         self.fenetre = pygame.display.set_mode((xd_lc, yd_lc))
         self.continuer = True
         self.clock = pygame.time.Clock()
-        self.map = Carte(self)
+        self.carte = Carte(self)
+        self.renderer = renderer(self)
+        self.joueur = Joueur(self)
+        self.raycasteur = raycasteur(self)
+        self.sprite = Processeur(self)
         self.Main()
 
     def Main(self):
+        pygame.mouse.set_visible(False)
         self.clock.tick(FPS)
-        pygame.display.set_caption(f'{self.clock.get_fps():.1f}')   # Permet d'afficher les fps en live à la place du nom de la fenetre
-        self.fenetre.fill('black')
-        #self.map.draw()
+        pygame.display.set_caption(
+            f'{self.clock.get_fps():.1f}'+'        '+'x = '+f'{self.joueur.x:.1f}'+'  '+'y = '+f'{self.joueur.y:.1f}')  # Permet d'afficher les fps en live à la place du nom de la fenetre
+        # self.fenetre.fill('black')
+        # self.map.draw()
         self.raycasteur.update()
+        self.sprite.update()
         self.joueur.update()
+        self.renderer.draw()
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Permet de gérer un clic sur le bouton de fermeture de la fenêtre
+                pygame.mouse.set_visible(True)
                 self.continuer = False
 
 
@@ -88,10 +93,10 @@ while True:
             # Handle settings button click
             Parametre = Parametres()
             while Parametre.continuer:
-                    Parametre.Main()
+                Parametre.Main()
         elif event.type == pygame.MOUSEBUTTONDOWN and credits_button_rect.collidepoint(event.pos):
             credit = Credits()
-            while credit.continuer :
+            while credit.continuer:
                 credit.Main()
         elif event.type == pygame.MOUSEBUTTONDOWN and quitter_button_rect.collidepoint(event.pos):
             pygame.quit()
@@ -103,12 +108,11 @@ while True:
     # Draw the buttons
     screen.fill((0, 0, 0))
     screen.blit(pygame.transform.scale(bg,(xd,yd)),(0,0))
-    #pygame.draw.rect(screen, (0, 0, 0), background_rect)
     screen.blit(start_button_text, start_button_text_rect)
     screen.blit(settings_button_text, settings_button_text_rect)
     screen.blit(credits_button_text, credits_button_rect)
     screen.blit(quitter_button_text, quitter_button_rect)
-    screen.blit(pygame.transform.scale(img,(400,200)), logo_button_rect)
-    
-# Update the display
+    screen.blit(pygame.transform.scale(img, (400, 200)), logo_button_rect)
+
+    # Update the display
     pygame.display.flip()

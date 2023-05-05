@@ -1,6 +1,4 @@
-from joueur import *
 from parametres import *
-from carte import *
 from chargeur_textures import *
 import math
 
@@ -8,11 +6,36 @@ import math
 class raycasteur:
     def __init__(self, jeu):
         self.jeu = jeu
+        self.resultat = []
+        self.pending = []
+        self.textures = self.jeu.renderer.mur
+
+    def get_object(self):
+        self.pending = []
+        for rayon, valeurs in enumerate(self.resultat):
+            profondeur, hauteur_proj, texture, offset = valeurs
+            if hauteur_proj < yd :
+                colone = self.textures[texture].subsurface(
+                    offset * (T_TEXTURE - ECHELLE), 0, ECHELLE, T_TEXTURE
+                )
+                colone = pygame.transform.scale(colone, (ECHELLE, hauteur_proj))
+                mur_pos = (rayon * ECHELLE, D_yd - hauteur_proj // 2)
+            else :
+                hauteur_texture = T_TEXTURE * yd /hauteur_proj
+                colone = self.textures[texture].subsurface(
+                    offset*(T_TEXTURE-ECHELLE), D_T_TEXTURE - hauteur_texture //2,ECHELLE,hauteur_texture
+                )
+                colone = pygame.transform.scale(colone,(ECHELLE,yd))
+                mur_pos = (rayon*ECHELLE,0)
+            self.pending.append((profondeur, colone, mur_pos))
 
     def raycast(self):
+        self.resultat = []
         ox, oy = self.jeu.joueur.pos
         x_carte, y_carte = self.jeu.joueur.case
         angle_rayon = self.jeu.joueur.angle - D_FOV + 0.0001
+        texture_vert, texture_hor = 1, 1
+
         for rayon in range(RAYONS):
             sin_a = math.sin(angle_rayon)
             cos_a = math.cos(angle_rayon)
@@ -28,6 +51,7 @@ class raycasteur:
             for i in range(DRAW_DISTANCE):
                 case_hor = int(x_hor), int(y_hor)
                 if case_hor in self.jeu.carte.carte_dict:
+                    texture_hor = self.jeu.carte.carte_dict[case_hor]
                     break
                 x_hor += dx
                 y_hor += dy
@@ -44,6 +68,7 @@ class raycasteur:
             for i in range(DRAW_DISTANCE):
                 case_vert = int(x_vert), int(y_vert)
                 if case_vert in self.jeu.carte.carte_dict:
+                    texture_vert = self.jeu.carte.carte_dict[case_vert]
                     break
                 x_vert += dx
                 y_vert += dy
@@ -51,15 +76,25 @@ class raycasteur:
 
             # profondeur
             if profond_vert < profond_hor:
-                profondeur = profond_vert
+                profondeur, texture = profond_vert, texture_vert
+                y_vert %= 1
+                offset = y_vert if cos_a > 0 else (1-y_vert)
             else:
-                profondeur = profond_hor
+                profondeur, texture = profond_hor, texture_hor
+                x_hor %= 1
+                offset = (1 - x_hor) if sin_a > 0 else x_hor
 
-            # draw pour debug
-            pygame.draw.line(self.jeu.fenetre, 'yellow', (100 * ox, 100 * oy),
-                             (100 * ox + 100 * profondeur * cos_a, 100 * oy + 100 * profondeur * sin_a))
+            # anti fisheye
+            # profondeur *= math.cos(self.jeu.joueur.angle - angle_rayon)
+
+            # projction aka fausse 3d
+            hauteur_proj = DISTANCE_ECRAN / (profondeur + 0.0001)
+
+            # resultat
+            self.resultat.append((profondeur, hauteur_proj, texture, offset))
 
             angle_rayon += DELTA_ANGLE
 
     def update(self):
         self.raycast()
+        self.get_object()
