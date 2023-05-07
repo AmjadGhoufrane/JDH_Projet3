@@ -14,22 +14,22 @@ from processeur_objets import *
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
-# Set up the display
+
 screen = pygame.display.set_mode((xd, yd))
-pygame.display.set_caption("The Dark Room")
+pygame.display.set_caption("The Darkness")
 
 pygame.mixer.music.load("audio.mp3")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
 
-# Set up the font
+
 font = pygame.font.Font(None, 48)
 
-# Set up the "START" button
+
 start_button_text = font.render("JOUER", True, (255, 255, 255))
 start_button_rect = start_button_text.get_rect(center=(xd // 2, yd // 2 + 25))
 
-# Set up the "SETTINGS" button
+
 settings_button_text = font.render("PARAMETRES DU JEU", True, (255, 255, 255))
 settings_button_rect = settings_button_text.get_rect(center=(xd // 2, yd // 2 + 100))
 
@@ -43,9 +43,9 @@ f = pygame.font.Font(None, 100)
 img = pygame.image.load("logo.png")
 
 logo_button_text = f.render("LOGO TEMP", True, (255, 255, 255))
-logo_button_rect = logo_button_text.get_rect(center=(xd // 2, yd // 2 - 200))
+logo_button_rect = logo_button_text.get_rect(center=(xd // 2 - 110, yd // 2 - 350))
 
-
+bg = pygame.image.load("arriere.png")
 class Mainlanceur:
     def __init__(self, xd_lc, yd_lc):
         self.delta_time = 1
@@ -78,19 +78,19 @@ class Mainlanceur:
 
 
 while True:
-    # Handle events
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN and start_button_rect.collidepoint(event.pos):
             pygame.mixer.music.stop()
-            # Launch the game
+
             Jeu = Mainlanceur(xd, yd)
             while Jeu.continuer:
                 Jeu.Main()
         elif event.type == pygame.MOUSEBUTTONDOWN and settings_button_rect.collidepoint(event.pos):
-            # Handle settings button click
+        
             Parametre = Parametres()
             while Parametre.continuer:
                 Parametre.Main()
@@ -101,17 +101,18 @@ while True:
         elif event.type == pygame.MOUSEBUTTONDOWN and quitter_button_rect.collidepoint(event.pos):
             pygame.quit()
             sys.exit()
-    # Center the text on the buttons
+   
     start_button_text_rect = start_button_text.get_rect(center=start_button_rect.center)
     settings_button_text_rect = settings_button_text.get_rect(center=settings_button_rect.center)
 
-    # Draw the buttons
+    
     screen.fill((0, 0, 0))
+    screen.blit(pygame.transform.scale(bg,(xd,yd)),(0,0))
     screen.blit(start_button_text, start_button_text_rect)
     screen.blit(settings_button_text, settings_button_text_rect)
     screen.blit(credits_button_text, credits_button_rect)
     screen.blit(quitter_button_text, quitter_button_rect)
-    screen.blit(pygame.transform.scale(img, (400, 200)), logo_button_rect)
+    screen.blit(pygame.transform.scale(img, (627, 398)), logo_button_rect)
 
-    # Update the display
+   
     pygame.display.flip()
