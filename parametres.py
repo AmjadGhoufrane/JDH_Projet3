@@ -62,9 +62,11 @@ class Parametres:
         self.Main()
 
     def Main(self):
+        bg = pygame.image.load("bg.png")
         self.clock.tick(FPS)
         pygame.display.flip()
         self.screen.fill((0, 0, 0))
+        self.screen.blit(pygame.transform.scale(bg,(xd,yd)),(0,0))
         self.screen.blit(self.fov_text, self.fov_rect)
         self.screen.blit(self.fps_text, self.fps_rect)
         self.screen.blit(self.pos_text, self.pos_rect)
