@@ -67,10 +67,21 @@ class SpriteAnime(Sprite):
         self.images = self.get_images(self.chemin)
         self.animation_temps_precedant = pygame.time.get_ticks()
         self.animation_trigger = False
+         
 
     def update(self):
+        
         super().update()
         self.check_animation_time()
+        
+        if self.dx > 0:
+            self.x -= 0.01
+        elif self.dx < 0:
+            self.x += 0.01
+        if self.dy < 0:
+            self.y += 0.01
+        elif self.dy > 0:
+            self.y -= 0.01
         self.animate(self.images)
 
     def animate(self, images):
