@@ -45,7 +45,6 @@ class Secret:
                             while hehe.continuer:
                                 hehe.Main()
                         elif event.type == pygame.MOUSEBUTTONDOWN and self.text3_rect.collidepoint(event.pos):
-                            pygame.mixer.music.stop()
                             hehe = Credits()
                             while hehe.continuer:
                                 hehe.Main()
