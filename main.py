@@ -64,12 +64,13 @@ class Mainlanceur:
         self.clock.tick(FPS)
         pygame.display.set_caption(
             f'{self.clock.get_fps():.1f}'+'        '+'x = '+f'{self.joueur.x:.1f}'+'  '+'y = '+f'{self.joueur.y:.1f}')  # Permet d'afficher les fps en live à la place du nom de la fenetre
-        # self.fenetre.fill('black')
-        # self.map.draw()
         self.raycasteur.update()
         self.sprite.update()
         self.joueur.update()
         self.renderer.draw()
+        pygame.draw.rect(self.fenetre, 'black', pygame.Rect(0, -260, 520, 520))
+        self.carte.draw()
+        self.joueur.draw()
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Permet de gérer un clic sur le bouton de fermeture de la fenêtre

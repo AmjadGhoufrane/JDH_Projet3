@@ -64,15 +64,15 @@ class Joueur:
             self.y += dy
 
     def draw(self):
-        # pygame.draw.line(self.jeu.fenetre, 'yellow', (self.x * 100, self.y * 100),
-        #                 (self.x * 100 + xd * math.cos(self.angle),
-        #                  self.y * 100 + xd * math.sin(self.angle)), 2)
-        pygame.draw.circle(self.jeu.fenetre, 'green', (self.x * 100, self.y * 100), 15)
+        #pygame.draw.line(self.jeu.fenetre, 'yellow', ((self.x * 100)/5, (self.y * 100)/5),
+        #                 ((self.x * 100)/5 + (xd/5) * math.cos(self.angle),
+        #                  (self.y * 100)/5 + (xd/5) * math.sin(self.angle)), 2)
+        pygame.draw.circle(self.jeu.fenetre, 'green', ((self.x * 100)/5, (self.y * 100)/5), 6)
 
     def update(self):
         self.mouvement()
         self.mouse_control()
-        # self.draw()
+        self.draw()
 
     @property  # Permet de recuperer la position comme une variable mais avec un intermediaire
     def pos(self):
