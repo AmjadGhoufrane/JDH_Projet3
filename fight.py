@@ -1,6 +1,6 @@
 import pygame
 from pygame import mixer
-from fighter import Fighter
+from fighter import*
 from parametres import *
 from secret import *
 
@@ -83,7 +83,7 @@ class Fight:
 
         #crée deux instances of joueurs
         fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATION_STEPS, sword_fx)
-        fighter_2 = Fighter(2, 1400, 310, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
+        fighter_2 = Enemy(2, 1400, 310, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
 
         #loop
         run = True

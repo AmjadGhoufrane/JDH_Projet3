@@ -196,7 +196,7 @@ class Fighter():
     
 class Enemy(Fighter):
   def move(self, screen_width, screen_height, surface, target, round_over):
-    SPEED = 10
+    SPEED = 5
     GRAVITY = 2
     dx = 0
     dy = 0
@@ -213,7 +213,7 @@ class Enemy(Fighter):
 
         #attaque
         if pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height).colliderect(target.rect):
-          target.health -= 10
+          target.health -= 5
           target.hit = True
           self.attacking = True
           self.attack_cooldown -= 2
