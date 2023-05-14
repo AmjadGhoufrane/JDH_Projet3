@@ -60,9 +60,10 @@ class Sprite:
 
 
 class SpriteAnime(Sprite):
-    def __init__(self, jeu, chemin='textures/animes/1.png', pos=(10, 4.5), echelle=1.0, shift=0.0,
+    def __init__(self, jeu, actif, chemin='textures/animes/1.png', pos=(10, 4.5), echelle=1.0, shift=0.0,
                  animation_time=120):
         super().__init__(jeu, chemin, pos, echelle, shift)
+        self.actif = actif
         self.animation_time = animation_time
         self.chemin = chemin.rsplit('/', 1)[0]
         self.images = self.get_images(self.chemin)
@@ -71,17 +72,7 @@ class SpriteAnime(Sprite):
 
     def update(self):
         super().update()
-        if self.dx < 0.5 and self.dy < 0.5 and self.dx > -0.5 and self.dy > -0.5:
-            Fight()
-        else:
-            if self.dx > 0.5:
-                self.x -= 0.01
-            elif self.dx < -0.5:
-                self.x += 0.01
-            if self.dy < -0.5:
-                self.y += 0.01
-            elif self.dy > 0.5:
-                self.y -= 0.01
+        self.mouvement()
         self.check_animation_time()
         self.animate(self.images)
 
@@ -89,6 +80,20 @@ class SpriteAnime(Sprite):
         if self.animation_trigger:
             images.rotate(-1)
             self.image = images[0]
+
+    def mouvement(self):
+        if self.actif :
+            if self.dx < 0.5 and self.dy < 0.5 and self.dx > -0.5 and self.dy > -0.5:
+                Fight()
+            else:
+                if self.dx > 0.5:
+                    self.x -= 0.01
+                elif self.dx < -0.5:
+                    self.x += 0.01
+                if self.dy < -0.5:
+                    self.y += 0.01
+                elif self.dy > 0.5:
+                    self.y -= 0.01
 
     def check_animation_time(self):
         self.animation_trigger = False
