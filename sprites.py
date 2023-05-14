@@ -82,6 +82,9 @@ class SpriteAnime(Sprite):
             self.image = images[0]
 
     def mouvement(self):
+        if self.dx < 8 and self.dy < 8 and self.dx > -8 and self.dy > -8:
+                self.actif = True
+
         if self.actif :
             if self.dx < 0.5 and self.dy < 0.5 and self.dx > -0.5 and self.dy > -0.5:
                 Fight()
