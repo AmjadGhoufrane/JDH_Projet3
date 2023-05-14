@@ -1,16 +1,14 @@
 import pygame
 from pygame import mixer
-from fighter import *
+from fighter import Fighter
 from parametres import *
 from secret import *
-
 
 class Fight:
     def __init__(self):
         mixer.init()
         pygame.init()
 
-        #creation fenetre
         SCREEN_WIDTH = xd
         SCREEN_HEIGHT = yd
 
@@ -26,6 +24,7 @@ class Fight:
         RED = (255, 0, 0)
         BLUE = (0, 0, 255)
         WHITE = (255, 255, 255)
+        BLACK = (0,0,0)
 
         #variables du jeux
         intro_count = 3
@@ -84,7 +83,7 @@ class Fight:
 
         #crée deux instances of joueurs
         fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATION_STEPS, sword_fx)
-        fighter_2 = Enemy(2, 1400, 310, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
+        fighter_2 = Fighter(2, 1400, 310, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
 
         #loop
         run = True
@@ -105,7 +104,7 @@ class Fight:
             fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1, round_over)
           else:
             #affiche timer
-            draw_text(str(intro_count), count_font, WHITE, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3)
+            draw_text(str(intro_count), count_font, BLACK, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3)
             #update timer
             if (pygame.time.get_ticks() - last_count_update) >= 1000:
               intro_count -= 1
@@ -120,11 +119,9 @@ class Fight:
           #verifie si le joueur est vaincu
           if round_over == False:
             if fighter_1.alive == False:
-              win = False
               round_over = True
               round_over_time = pygame.time.get_ticks()
             elif fighter_2.alive == False:
-              win = True
               round_over = True
               round_over_time = pygame.time.get_ticks()
           else:
