@@ -71,16 +71,16 @@ class SpriteAnime(Sprite):
 
     def update(self):
         super().update()
-        if self.dx < 0 and self.dy < 0:
+        if self.dx < 0.5 and self.dy < 0.5 and self.dx > -0.5 and self.dy > -0.5:
             Fight()
         else:
-            if self.dx > 0:
+            if self.dx > 0.5:
                 self.x -= 0.01
-            elif self.dx < 0:
+            elif self.dx < -0.5:
                 self.x += 0.01
-            if self.dy < 0:
+            if self.dy < -0.5:
                 self.y += 0.01
-            elif self.dy > 0:
+            elif self.dy > 0.5:
                 self.y -= 0.01
         self.check_animation_time()
         self.animate(self.images)
