@@ -2,17 +2,20 @@ import pygame
 from pygame import mixer
 from fighter import Fighter
 from parametres import *
+from secret import *
 
 class Fight:
     def __init__(self):
         mixer.init()
         pygame.init()
 
-        #creation fenetre
-        SCREEN_WIDTH = 1000
-        SCREEN_HEIGHT = 600
+        SCREEN_WIDTH = xd
+        SCREEN_HEIGHT = yd
 
         screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        mixer.music.load("sound.mp3")
+        mixer.music.set_volume(0.5)
+        mixer.music.play(-1)
 
         clock = pygame.time.Clock()
         FPS = 60
@@ -79,7 +82,7 @@ class Fight:
 
         #crée deux instances of joueurs
         fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATION_STEPS, sword_fx)
-        fighter_2 = Fighter(2, 700, 310, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
+        fighter_2 = Fighter(2, 1400, 310, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
 
         #loop
         run = True
@@ -91,7 +94,7 @@ class Fight:
 
           #stat du joueur
           draw_health_bar(fighter_1.health, 20, 20)
-          draw_health_bar(fighter_2.health, 580, 20)
+          draw_health_bar(fighter_2.health, 1275, 20)
 
           #update countdown
           if intro_count <= 0:
@@ -129,7 +132,9 @@ class Fight:
               fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATION_STEPS, sword_fx)
               fighter_2 = Fighter(2, 700, 310, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
           if round_over == True :
-              pygame.quit()
+              shh = Secret()
+              while shh.continuer:
+                  shh.Main()
           #gere evenement 
           for event in pygame.event.get():
             if event.type == pygame.QUIT:
