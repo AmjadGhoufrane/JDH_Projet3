@@ -3,23 +3,34 @@ import pygame
 import sys
 
 xd, yd = 1700, 900
-FPS = 60
-P_POS = 1.5, 5
+FPS = 144
+P_POS = 1.5, 6
 P_ANGLE = 0
 P_VITESSE = 0.04
 P_VITESSE_ROTATION = 0.02
+TAILLE_ECHELLE_JOUEUR = 5
 
-FOV = math.pi / 3  # FOV de 60°
+MOUSE_SENSITIVITY = 0.002
+MOUSE_MAX_REL = 40
+MOUSE_BORDER_LEFT = 100
+MOUSE_BORDER_RIGHT = xd - MOUSE_BORDER_LEFT
+
+COULEUR_SOL = (70,70,70)
+
+FOV = math.pi / 2  # FOV de 60°
 D_FOV = FOV / 2
 RAYONS = xd // 2
 D_RAYONS = RAYONS // 2
 D_xd = xd // 2
 D_yd = yd // 2
 DELTA_ANGLE = FOV / RAYONS
-DRAW_DISTANCE = 20
+DRAW_DISTANCE = 50
 
 DISTANCE_ECRAN = D_xd/math.tan(D_FOV)
 ECHELLE = xd // RAYONS
+
+T_TEXTURE = 256
+D_T_TEXTURE = T_TEXTURE//2
 
 
 class Parametres:
@@ -51,9 +62,11 @@ class Parametres:
         self.Main()
 
     def Main(self):
+        bg = pygame.image.load("bg.png")
         self.clock.tick(FPS)
         pygame.display.flip()
         self.screen.fill((0, 0, 0))
+        self.screen.blit(pygame.transform.scale(bg,(xd,yd)),(0,0))
         self.screen.blit(self.fov_text, self.fov_rect)
         self.screen.blit(self.fps_text, self.fps_rect)
         self.screen.blit(self.pos_text, self.pos_rect)
